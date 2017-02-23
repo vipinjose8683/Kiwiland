@@ -1,19 +1,21 @@
-package kiwiland.trains;
+package kiwiland.trains.shortest;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import kiwiland.trains.domain.Edge;
+import kiwiland.trains.domain.Graph;
+import kiwiland.trains.domain.Node;
 
 /**
  * Finds the shortest path between two towns
  *
  */
-class ShortestRouteFinder {
-
-    private UnvisitedQueueCreator unvisitedQueueCreator = new UnvisitedQueueCreator();
-    
-    private DistanceMapCreator distanceMapCreator = new DistanceMapCreator();
+public class ShortestRouteFinder {
 
     public Integer find(Graph graph, String startTownS, String endTownS) {
         /*
@@ -21,8 +23,8 @@ class ShortestRouteFinder {
          */
         Node startTown = graph.getTowns().get(startTownS);
         Node endTown = graph.getTowns().get(endTownS);
-        List<NodeDistance> unvisitedTowns = unvisitedQueueCreator.create(graph, startTown);
-        Map<Node, NodeDistance> distance = distanceMapCreator.create(unvisitedTowns, startTown);
+        List<NodeDistance> unvisitedTowns = createUnvisitedTowns(graph, startTown);
+        Map<Node, NodeDistance> distance = createDistanceMap(unvisitedTowns, startTown);
         NodeDistance current = distance.get(startTown);
         Integer currentTownDistance = 0;
         while(!unvisitedTowns.isEmpty()) {
@@ -53,5 +55,26 @@ class ShortestRouteFinder {
         }
         return distance;
     }
+
+    private Map<Node, NodeDistance> createDistanceMap(List<NodeDistance> unvisitedTowns, Node startTown) {
+        Map<Node, NodeDistance> map = new HashMap<>();
+        for (NodeDistance distance : unvisitedTowns) {
+            map.put(distance.getTown(), distance);
+        }
+        map.put(startTown, new NodeDistance(startTown));
+        return map;
+    }
+    
+    private List<NodeDistance> createUnvisitedTowns(Graph graph, Node startTown) {
+        List<NodeDistance> list = new ArrayList<>();
+        for (Entry<String,Node> townEntry : graph.getTowns().entrySet()) {
+            Node town = townEntry.getValue();
+            if (!startTown.equals(town)) {
+                list.add(new NodeDistance(town));
+            }
+        }
+        return list;
+    }
+
 
 }

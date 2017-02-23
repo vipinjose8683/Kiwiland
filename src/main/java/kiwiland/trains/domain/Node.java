@@ -1,4 +1,4 @@
-package kiwiland.trains;
+package kiwiland.trains.domain;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -7,7 +7,7 @@ import java.util.TreeMap;
  * Represents a node
  *
  */
-class Node implements Comparable<Node> {
+public class Node implements Comparable<Node> {
     
     private String name;
     private Map<Edge,Node> weightedEdges = new TreeMap<>();

@@ -1,5 +1,8 @@
 package kiwiland.trains;
 
+import kiwiland.trains.domain.Graph;
+import kiwiland.trains.shortest.ShortestRouteFinder;
+
 public class KiwilandTrainApp {
     
     private static final int OUTPUT_1 = 0;

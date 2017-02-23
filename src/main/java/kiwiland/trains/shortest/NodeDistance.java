@@ -1,4 +1,6 @@
-package kiwiland.trains;
+package kiwiland.trains.shortest;
+
+import kiwiland.trains.domain.Node;
 
 class NodeDistance implements Comparable<NodeDistance> {
     

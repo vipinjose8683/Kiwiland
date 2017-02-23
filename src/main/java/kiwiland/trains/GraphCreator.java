@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import kiwiland.trains.domain.Edge;
+import kiwiland.trains.domain.Graph;
+import kiwiland.trains.domain.Node;
+
 /**
  * Creates the graph out of the input string
  *

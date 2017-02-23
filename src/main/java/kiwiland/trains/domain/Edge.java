@@ -1,10 +1,10 @@
-package kiwiland.trains;
+package kiwiland.trains.domain;
 
 /**
  * Represents a route between two cities
  *
  */
-class Edge implements Comparable<Edge> {
+public class Edge implements Comparable<Edge> {
     
     private Node startTown;
     private Node endTown;
