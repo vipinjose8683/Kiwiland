@@ -8,3 +8,8 @@ Feature: Trains In Kiwiland
     When the program is executed
     Then the Output No 8 is "9"
 
+@OnlyRun
+  Scenario: 9. The length of the shortest route (in terms of distance to travel) from B to B.
+    When the program is executed
+    Then the Output No 9 is "9"
+

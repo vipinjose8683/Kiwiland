@@ -21,6 +21,7 @@ public class KiwilandTrainApp {
         String[] result = new String[10];
         Graph graph = graphCreator.create(inputString);
         result[OUTPUT_8] = "" + spFinder.find(graph,"A","C");
+        result[OUTPUT_9] = "" + spFinder.find(graph,"B","B");
         // TODO Auto-generated method stub
         return result;
     }

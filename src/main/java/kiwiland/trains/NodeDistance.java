@@ -30,11 +30,11 @@ class NodeDistance implements Comparable<NodeDistance> {
             if (o.distance == null) {
                 value = 0;
             } else {
-                value = -1;
+                value = 1;
             }
         } else {
             if (o.distance == null) {
-                value = 1;
+                value = -1;
             } else {
                 value = this.distance.compareTo(o.distance);
             }

@@ -1,8 +1,9 @@
 package kiwiland.trains;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.PriorityQueue;
 
 /**
  * Finds the shortest path between two towns
@@ -20,17 +21,20 @@ class ShortestRouteFinder {
          */
         Node startTown = graph.getTowns().get(startTownS);
         Node endTown = graph.getTowns().get(endTownS);
-//        Set<Node> visitedTowns = new HashSet<>();
-        PriorityQueue<NodeDistance> unvisitedTowns = unvisitedQueueCreator.create(graph, startTown);
+        List<NodeDistance> unvisitedTowns = unvisitedQueueCreator.create(graph, startTown);
         Map<Node, NodeDistance> distance = distanceMapCreator.create(unvisitedTowns, startTown);
         NodeDistance current = distance.get(startTown);
         Integer currentTownDistance = 0;
-        while(current != null) {
-            distance = getUpdatedDistance(current.getTown(), distance, currentTownDistance);
-//            visitedTowns.add(current);
-            current = unvisitedTowns.poll();
-            if (current != null) {
+        while(!unvisitedTowns.isEmpty()) {
+            Node town = current.getTown();
+            distance = getUpdatedDistance(town, distance, currentTownDistance);
+            if (!unvisitedTowns.isEmpty()) {
+                Collections.sort(unvisitedTowns);
+                current = unvisitedTowns.remove(0);
                 currentTownDistance = current.getDistance();
+                if (currentTownDistance == null) {
+                    break;
+                }
             }
         }
         return distance.get(endTown).getDistance();
