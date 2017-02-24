@@ -1,7 +1,7 @@
 /**
  * 
  */
-package kiwiland.trains.trips;
+package kiwiland.trains;
 
 import java.util.Map.Entry;
 

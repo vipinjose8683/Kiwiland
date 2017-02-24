@@ -10,6 +10,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 
+import kiwiland.trains.combine.Combination;
+import kiwiland.trains.combine.Combiner;
+import kiwiland.trains.combine.WeightCalculator;
+import kiwiland.trains.combine.Validator;
 import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
@@ -36,10 +40,12 @@ public class CycleTripsFinder {
         Set<Trip> routes = new HashSet<>();
         routes = getMinimalRoutes(startTown, currentDistance, startTown, townStack, routes, maxWeight);
         routes = extendMinimalRoutes(routes);
-        Stack<Trip> addedRoutes = new Stack<>();
-        Set<String> allRoutes = new HashSet<>();
-        allRoutes = getRoutes(routes, currentDistance, allRoutes, addedRoutes, maxWeight);
-        return allRoutes.size();
+        Combiner<Trip> tripCombiner = new TripCombiner();
+        Validator<Trip> tripCombinationValidator = new TripCombinationValidator(maxWeight);
+        WeightCalculator<Trip> tripWeightCalculator = new TripWeightCalculator();
+        Combination<Trip> combination = new Combination<>(tripCombinationValidator, tripCombiner, tripWeightCalculator);
+        
+        return combination.get(routes).size();
     }
 
     private Set<Trip> extendMinimalRoutes(Set<Trip> minimalRoutes) {
@@ -52,32 +58,6 @@ public class CycleTripsFinder {
         }
         minimalRoutes.addAll(extendedRoutes);
         return minimalRoutes;
-    }
-
-    private Set<String> getRoutes(Set<Trip> extendedMinimalRoutes, Integer currentDistance, Set<String> allRoutes, Stack<Trip> addedRoutes, Integer maxWeight) {
-        for(Trip minimalRoute : extendedMinimalRoutes) {
-            addedRoutes.push(minimalRoute);
-            Integer newDistance = currentDistance + minimalRoute.getDistance();
-            if (newDistance < maxWeight) {
-                String route = takeSnapshot(addedRoutes);
-                allRoutes.add(route);
-                allRoutes = getRoutes(extendedMinimalRoutes, newDistance, allRoutes, addedRoutes, maxWeight);
-            }
-            addedRoutes.pop();
-        }
-        return allRoutes;
-    }
-
-    private String takeSnapshot(Stack<Trip> addedRoutes) {
-        StringBuilder sb = new StringBuilder();
-        for (Trip route : addedRoutes) {
-            for (Node town : route.getTowns()) {
-                sb.append(town.getName());
-            }
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        sb.append(sb.charAt(0));
-        return sb.toString();
     }
 
     private Set<Trip> getMinimalRoutes(Node currentTown, Integer currentDistance, Node startTown, Stack<Node> townStack, Set<Trip> minimalRoutes, Integer maxWeight) {
