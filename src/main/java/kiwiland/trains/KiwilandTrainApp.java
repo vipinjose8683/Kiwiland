@@ -19,7 +19,6 @@ public class KiwilandTrainApp {
     private static final int OUTPUT_8 = 7;
     private static final int OUTPUT_9 = 8;
     private static final int OUTPUT_10 = 9;
-    private static final int OUTPUT_11 = 10;
 
     private GraphCreator graphCreator = new GraphCreator();
 
@@ -46,8 +45,6 @@ public class KiwilandTrainApp {
         result[OUTPUT_8] = "" + spFinder.find(graph, "A", "C");
         result[OUTPUT_9] = "" + spFinder.find(graph, "B", "B");
         result[OUTPUT_10] = "" + tripsFinderByDistance.find(graph, "C", 30);
-//        TripsFinder2 finder2 = new TripFinder2(graph, new DistanceMeasure(), 30);
-//        result[OUTPUT_11] = "" + finder2.find("A", "C");
         return result;
     }
 

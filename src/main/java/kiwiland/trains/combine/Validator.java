@@ -1,6 +1,6 @@
 package kiwiland.trains.combine;
 
-public interface Validator<T> {
+public interface Validator {
     
     boolean validate(Integer threshold);
 

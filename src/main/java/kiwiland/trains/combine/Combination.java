@@ -18,7 +18,7 @@ public class Combination<T> {
     /**
      * The object that checks whether the given combination is valid
      */
-    private Validator<T> validator;
+    private Validator validator;
     
     /**
      * Calculates the threshold
@@ -31,7 +31,7 @@ public class Combination<T> {
      * @param tripCombinationValidator
      * @param tripCombiner
      */
-    public Combination(Validator<T> validator, Combiner<T> tripCombiner, WeightCalculator<T> thresholdCalculator) {
+    public Combination(Validator validator, Combiner<T> tripCombiner, WeightCalculator<T> thresholdCalculator) {
         super();
         this.combiner = tripCombiner;
         this.validator = validator;

@@ -15,14 +15,14 @@ import kiwiland.trains.domain.Node;
 public class TripCalculator {
 
     public String calculate(Graph graph, String path) {
-        String result = null;
+        String result;
         Integer distance = 0;
         Integer i = 0;
-        Node currentTown = graph.getTowns().get("" + path.charAt(i++));
+        Node currentTown = graph.getTowns().get(Character.toString(path.charAt(i++)));
         Integer pathLength = path.length();
         boolean pathDoesNoExist = false;
         for (; i < pathLength;i++) {
-            String nextTownName = "" + path.charAt(i);
+            String nextTownName = Character.toString(path.charAt(i));
             boolean foundNextTown = false;
             for (Entry<Node, Integer> edgeEntry : currentTown.getWieghtedEdges().entrySet()) {
                 Node nextTown = edgeEntry.getKey();

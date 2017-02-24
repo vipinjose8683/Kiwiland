@@ -2,7 +2,7 @@ package kiwiland.trains.trips;
 
 import kiwiland.trains.combine.Validator;
 
-class TripCombinationValidator implements Validator<Trip> {
+class TripCombinationValidator implements Validator {
     
     private Integer maxWeight;
 

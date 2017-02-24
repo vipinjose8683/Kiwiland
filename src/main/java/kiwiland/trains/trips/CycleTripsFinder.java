@@ -40,7 +40,7 @@ public class CycleTripsFinder {
         routes = getMinimalRoutes(startTown, currentDistance, startTown, townStack, routes, maxWeight);
         routes = extendMinimalRoutes(routes);
         Combiner<Trip> tripCombiner = new TripCombiner();
-        Validator<Trip> tripCombinationValidator = new TripCombinationValidator(maxWeight);
+        Validator tripCombinationValidator = new TripCombinationValidator(maxWeight);
         WeightCalculator<Trip> tripWeightCalculator = new TripWeightCalculator();
         Combination<Trip> combination = new Combination<>(tripCombinationValidator, tripCombiner, tripWeightCalculator);
         
