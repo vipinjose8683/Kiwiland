@@ -13,6 +13,7 @@ import java.util.Stack;
 import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
+import kiwiland.trains.weight.Weightage;
 
 /**
  * Finds all different routes from the given source to destination
@@ -20,20 +21,24 @@ import kiwiland.trains.domain.Node;
  */
 public class DifferentRoutesFinder {
 
-    private static final int MAX_DISTANCE = 30;
+    private Weightage weightage;
 
-    public Integer find(Graph graph, String startTownS) {
+    public DifferentRoutesFinder(Weightage weightage) {
+        this.weightage = weightage;
+    }
+
+    public Integer find(Graph graph, String startTownS, Integer maxWeight) {
 
         Node startTown = graph.getTowns().get(startTownS);
         Stack<Node> townStack = new Stack<>();
         townStack.push(startTown);
         Integer currentDistance = 0;
         Set<Route> routes = new HashSet<>();
-        routes = getMinimalRoutes(startTown, currentDistance, startTown, townStack, routes);
+        routes = getMinimalRoutes(startTown, currentDistance, startTown, townStack, routes, maxWeight);
         routes = extendMinimalRoutes(routes);
         Stack<Route> addedRoutes = new Stack<>();
         Set<String> allRoutes = new HashSet<>();
-        allRoutes = getRoutes(routes, currentDistance, allRoutes, addedRoutes);
+        allRoutes = getRoutes(routes, currentDistance, allRoutes, addedRoutes, maxWeight);
         return allRoutes.size();
     }
 
@@ -49,14 +54,14 @@ public class DifferentRoutesFinder {
         return minimalRoutes;
     }
 
-    private Set<String> getRoutes(Set<Route> extendedMinimalRoutes, Integer currentDistance, Set<String> allRoutes, Stack<Route> addedRoutes) {
+    private Set<String> getRoutes(Set<Route> extendedMinimalRoutes, Integer currentDistance, Set<String> allRoutes, Stack<Route> addedRoutes, Integer maxWeight) {
         for(Route minimalRoute : extendedMinimalRoutes) {
             addedRoutes.push(minimalRoute);
             Integer newDistance = currentDistance + minimalRoute.getDistance();
-            if (newDistance < MAX_DISTANCE) {
+            if (newDistance < maxWeight) {
                 String route = takeSnapshot(addedRoutes);
                 allRoutes.add(route);
-                allRoutes = getRoutes(extendedMinimalRoutes, newDistance, allRoutes, addedRoutes);
+                allRoutes = getRoutes(extendedMinimalRoutes, newDistance, allRoutes, addedRoutes, maxWeight);
             }
             addedRoutes.pop();
         }
@@ -75,16 +80,16 @@ public class DifferentRoutesFinder {
         return sb.toString();
     }
 
-    private Set<Route> getMinimalRoutes(Node currentTown, Integer currentDistance, Node startTown, Stack<Node> townStack, Set<Route> minimalRoutes) {
+    private Set<Route> getMinimalRoutes(Node currentTown, Integer currentDistance, Node startTown, Stack<Node> townStack, Set<Route> minimalRoutes, Integer maxWeight) {
         Map<Edge, Node> edges = currentTown.getWieghtedEdges();
         for (Entry<Edge, Node> edgeEntry : edges.entrySet()) {
             Node nextTown = edgeEntry.getValue();
             townStack.push(nextTown);
-            Integer newDistance = currentDistance + edgeEntry.getKey().getDistance();
+            Integer newDistance = currentDistance + this.weightage.getWeight(edgeEntry);
             if (nextTown == startTown) {
                 minimalRoutes.add(new Route(new ArrayList<>(townStack), newDistance));
-            } else if (newDistance <= MAX_DISTANCE) {
-                minimalRoutes = getMinimalRoutes(nextTown, newDistance, startTown, townStack, minimalRoutes);
+            } else if (newDistance <= maxWeight) {
+                minimalRoutes = getMinimalRoutes(nextTown, newDistance, startTown, townStack, minimalRoutes, maxWeight);
             }
             townStack.pop();
         }

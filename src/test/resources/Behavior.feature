@@ -17,3 +17,7 @@ Feature: Trains In Kiwiland
     When the program is executed
     Then the Output No 10 is "7"
 
+  Scenario: 6. The number of trips starting at C and ending at C with a maximum of 3 stops.  In the sample data below, there are two such trips: C-D-C (2 stops). and C-E-B-C (3 stops).
+    When the program is executed
+    Then the Output No 6 is "2"
+
