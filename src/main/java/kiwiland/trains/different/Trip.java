@@ -4,13 +4,13 @@ import java.util.List;
 
 import kiwiland.trains.domain.Node;
 
-class Route {
+class Trip {
     
     List<Node> towns;
     
     Integer distance;
 
-    public Route(List<Node> towns, Integer distance) {
+    public Trip(List<Node> towns, Integer distance) {
         super();
         this.towns = towns;
         this.distance = distance;

@@ -1,6 +1,6 @@
 package kiwiland.trains;
 
-import kiwiland.trains.different.DifferentRoutesFinder;
+import kiwiland.trains.different.TripsFinder;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.shortest.ShortestRouteFinder;
 import kiwiland.trains.weight.DistanceWeightage;
@@ -23,9 +23,9 @@ public class KiwilandTrainApp {
     
     private ShortestRouteFinder spFinder = new ShortestRouteFinder();
     
-    private DifferentRoutesFinder tripsFinderByDistance = new DifferentRoutesFinder(new DistanceWeightage());
+    private TripsFinder tripsFinderByDistance = new TripsFinder(new DistanceWeightage());
 
-    private DifferentRoutesFinder tripsFinderByStops = new DifferentRoutesFinder(new StopWeightage());
+    private TripsFinder tripsFinderByStops = new TripsFinder(new StopWeightage());
 
     public String[] process(String inputString) {
         String[] result = new String[10];
