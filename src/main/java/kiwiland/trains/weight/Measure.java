@@ -5,7 +5,6 @@ package kiwiland.trains.weight;
 
 import java.util.Map.Entry;
 
-import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Node;
 
 /**
@@ -14,6 +13,6 @@ import kiwiland.trains.domain.Node;
  */
 public interface Measure {
     
-    Integer getWeight(Entry<Edge,Node> route);
+    Integer getWeight(Entry<Node, Integer> route);
 
 }

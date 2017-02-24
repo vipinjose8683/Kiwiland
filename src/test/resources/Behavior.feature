@@ -44,8 +44,3 @@ Feature: Trains In Kiwiland
   Scenario: 4. The distance of the route A-E-B-C-D.
     When the program is executed
     Then the Output No 4 is "22"
-
-#  Scenario: 11.The number of different routes from A to E with a distance of less than 30.
-#    When the program is executed
-#    Then the Output No 11 is "7"
-

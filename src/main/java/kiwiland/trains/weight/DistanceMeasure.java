@@ -5,7 +5,6 @@ package kiwiland.trains.weight;
 
 import java.util.Map.Entry;
 
-import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Node;
 
 /**
@@ -15,8 +14,8 @@ import kiwiland.trains.domain.Node;
 public class DistanceMeasure implements Measure {
 
     @Override
-    public Integer getWeight(Entry<Edge,Node> routeEntry) {
-        return routeEntry.getKey().getDistance();
+    public Integer getWeight(Entry<Node, Integer> routeEntry) {
+        return routeEntry.getValue();
     }
 
 }

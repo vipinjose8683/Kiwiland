@@ -1,11 +1,8 @@
 package kiwiland.trains;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
-import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
 
@@ -19,8 +16,6 @@ class GraphCreator {
         Graph graph = new Graph();
         Map<String,Node> towns = new HashMap<>();
         graph.setTowns(towns);
-        Set<Edge> routes = new HashSet<>();
-        graph.setRoutes(routes);
         
         String[] trips = inputString.split(", ");
         for (String trip : trips) {
@@ -29,9 +24,7 @@ class GraphCreator {
             String distance = trip.substring(2, 3);
             Node startTown = getTown(startTownS, graph);
             Node endTown = getTown(endTownS, graph);
-            Edge route = new Edge(startTown, endTown, Integer.parseInt(distance));
-            startTown.addEdge(route);
-            graph.getRoutes().add(route);
+            startTown.addEdge(endTown, Integer.parseInt(distance));
         }
         return graph;
     }

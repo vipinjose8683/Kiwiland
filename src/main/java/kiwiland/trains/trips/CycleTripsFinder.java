@@ -12,9 +12,8 @@ import java.util.Stack;
 
 import kiwiland.trains.combine.Combination;
 import kiwiland.trains.combine.Combiner;
-import kiwiland.trains.combine.WeightCalculator;
 import kiwiland.trains.combine.Validator;
-import kiwiland.trains.domain.Edge;
+import kiwiland.trains.combine.WeightCalculator;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
 import kiwiland.trains.weight.Measure;
@@ -61,9 +60,9 @@ public class CycleTripsFinder {
     }
 
     private Set<Trip> getMinimalRoutes(Node currentTown, Integer currentDistance, Node startTown, Stack<Node> townStack, Set<Trip> minimalRoutes, Integer maxWeight) {
-        Map<Edge, Node> edges = currentTown.getWieghtedEdges();
-        for (Entry<Edge, Node> edgeEntry : edges.entrySet()) {
-            Node nextTown = edgeEntry.getValue();
+        Map<Node, Integer> edges = currentTown.getWieghtedEdges();
+        for (Entry<Node, Integer> edgeEntry : edges.entrySet()) {
+            Node nextTown = edgeEntry.getKey();
             townStack.push(nextTown);
             Integer newDistance = currentDistance + this.measure.getWeight(edgeEntry);
             if (nextTown == startTown) {

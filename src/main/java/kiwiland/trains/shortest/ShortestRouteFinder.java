@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
 
@@ -42,18 +41,18 @@ public class ShortestRouteFinder {
         return distance.get(endTown).getDistance();
     }
 
-    private Map<Node, NodeDistance> getUpdatedDistance(Node current, Map<Node, NodeDistance> distance, Integer currentTownDistance) {
-        for (Entry<Edge,Node> edgeEntry : current.getWieghtedEdges().entrySet()) {
-            Edge route = edgeEntry.getKey();
-            Node endTown = edgeEntry.getValue();
-            NodeDistance endTownDistance = distance.get(endTown);
-            Integer newDistance = currentTownDistance + route.getDistance();
+    private Map<Node, NodeDistance> getUpdatedDistance(Node current, Map<Node, NodeDistance> townDistances, Integer currentTownDistance) {
+        for (Entry<Node, Integer> edgeEntry : current.getWieghtedEdges().entrySet()) {
+            Node endTown = edgeEntry.getKey();
+            Integer distance = edgeEntry.getValue();
+            NodeDistance endTownDistance = townDistances.get(endTown);
+            Integer newDistance = currentTownDistance + distance;
             Integer currentEndTownDistance = endTownDistance.getDistance();
             if (currentEndTownDistance == null || newDistance < currentEndTownDistance) {
                 endTownDistance.setDistance(newDistance);
             }
         }
-        return distance;
+        return townDistances;
     }
 
     private Map<Node, NodeDistance> createDistanceMap(List<NodeDistance> unvisitedTowns, Node startTown) {

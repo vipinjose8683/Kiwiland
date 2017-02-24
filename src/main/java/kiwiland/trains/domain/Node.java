@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public class Node implements Comparable<Node> {
     
     private String name;
-    private Map<Edge,Node> weightedEdges = new TreeMap<>();
+    private Map<Node, Integer> weightedEdges = new TreeMap<>();
     
     public Node(String name) {
         super();
@@ -21,12 +21,12 @@ public class Node implements Comparable<Node> {
         return name;
     }
     
-    public Map<Edge,Node> getWieghtedEdges() {
+    public Map<Node, Integer> getWieghtedEdges() {
         return weightedEdges;
     }
     
-    public void addEdge(Edge edge) {
-        weightedEdges.put(edge, edge.getEndTown());
+    public void addEdge(Node endTown, Integer distance) {
+        weightedEdges.put(endTown, distance);
     }
 
     @Override

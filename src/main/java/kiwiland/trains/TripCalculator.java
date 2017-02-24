@@ -5,7 +5,6 @@ package kiwiland.trains;
 
 import java.util.Map.Entry;
 
-import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
 
@@ -25,10 +24,10 @@ public class TripCalculator {
         for (; i < pathLength;i++) {
             String nextTownName = "" + path.charAt(i);
             boolean foundNextTown = false;
-            for (Entry<Edge, Node> edgeEntry : currentTown.getWieghtedEdges().entrySet()) {
-                Node nextTown = edgeEntry.getValue();
+            for (Entry<Node, Integer> edgeEntry : currentTown.getWieghtedEdges().entrySet()) {
+                Node nextTown = edgeEntry.getKey();
                 if (nextTown.getName().equals(nextTownName)) {
-                    distance += edgeEntry.getKey().getDistance();
+                    distance += edgeEntry.getValue();
                     currentTown = nextTown;
                     foundNextTown = true;
                     break;

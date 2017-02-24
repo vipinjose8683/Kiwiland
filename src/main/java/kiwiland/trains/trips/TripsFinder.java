@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 
-import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
 
@@ -24,9 +23,9 @@ public class TripsFinder {
     }
 
     private Set<String> getMinimalRoutes(Node currentTown, Integer currentDistance, Node endTown, Stack<Node> townStack, Set<String> minimalRoutes, Integer stopsCount) {
-        Map<Edge, Node> edges = currentTown.getWieghtedEdges();
-        for (Entry<Edge, Node> edgeEntry : edges.entrySet()) {
-            Node nextTown = edgeEntry.getValue();
+        Map<Node, Integer> edges = currentTown.getWieghtedEdges();
+        for (Entry<Node, Integer> edgeEntry : edges.entrySet()) {
+            Node nextTown = edgeEntry.getKey();
             townStack.push(nextTown);
             Integer newDistance = currentDistance + 1;
             if (nextTown == endTown && newDistance == stopsCount) {

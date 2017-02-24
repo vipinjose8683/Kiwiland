@@ -5,7 +5,6 @@ package kiwiland.trains.weight;
 
 import java.util.Map.Entry;
 
-import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Node;
 
 /**
@@ -18,7 +17,7 @@ public class StopsMeasure implements Measure {
      * @see kiwiland.trains.Weightage#getWeight(java.util.Map.Entry)
      */
     @Override
-    public Integer getWeight(Entry<Edge, Node> route) {
+    public Integer getWeight(Entry<Node, Integer> route) {
         return 1;
     }
 
