@@ -25,8 +25,13 @@ public class KiwilandStepdefs {
 
     @Then("^the Output No (\\d+) is \"([^\"]*)\"$")
     public void the_Output_No_is(int arg1, String arg2) throws Throwable {
-        System.out.println("Output #" + arg1 + ": " + result[arg1 - 1]);
         assertEquals(result[arg1 - 1], arg2, "Result at " + arg1);
+        if (arg1 == 4) {
+            Integer resultLength = this.result.length;
+            for (int i = 0; i < resultLength; i++) {
+                System.out.println("Output #" + (i + 1) + ": " + result[i]);
+            }
+        }
     }
 
 }

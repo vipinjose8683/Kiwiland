@@ -25,3 +25,23 @@ Feature: Trains In Kiwiland
     When the program is executed
     Then the Output No 7 is "3"
 
+  Scenario: 1. The distance of the route A-B-C.
+    When the program is executed
+    Then the Output No 1 is "9"
+
+  Scenario: 5. The distance of the route A-E-D.
+    When the program is executed
+    Then the Output No 5 is "NO SUCH ROUTE"
+
+  Scenario: 2. The distance of the route A-D.
+    When the program is executed
+    Then the Output No 2 is "5"
+
+  Scenario: 3. The distance of the route A-D-C.
+    When the program is executed
+    Then the Output No 3 is "13"
+
+  Scenario: 4. The distance of the route A-E-B-C-D.
+    When the program is executed
+    Then the Output No 4 is "22"
+
