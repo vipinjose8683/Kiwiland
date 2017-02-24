@@ -9,7 +9,7 @@ import java.util.Set;
  * Finds out various combinations that fit the criteria for the given set of inputs.
  *
  */
-public class Combination<T> {
+public class Permutation<T> {
     
     /**
      * Combines the input to the result so far
@@ -32,7 +32,7 @@ public class Combination<T> {
      * @param tripCombinationValidator
      * @param tripCombiner
      */
-    public Combination(Validator validator, Combiner<T> tripCombiner, WeightCalculator<T> thresholdCalculator) {
+    public Permutation(Validator validator, Combiner<T> tripCombiner, WeightCalculator<T> thresholdCalculator) {
         super();
         this.combiner = tripCombiner;
         this.validator = validator;

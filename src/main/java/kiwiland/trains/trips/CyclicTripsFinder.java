@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import kiwiland.trains.combine.Combination;
+import kiwiland.trains.combine.Permutation;
 import kiwiland.trains.combine.Combiner;
 import kiwiland.trains.combine.Validator;
 import kiwiland.trains.combine.WeightCalculator;
@@ -43,9 +43,9 @@ public class CyclicTripsFinder {
         Combiner<Trip> tripCombiner = new TripCombiner();
         Validator tripCombinationValidator = new TripCombinationValidator(maxWeight);
         WeightCalculator<Trip> tripWeightCalculator = new TripWeightCalculator();
-        Combination<Trip> combination = new Combination<>(tripCombinationValidator, tripCombiner, tripWeightCalculator);
+        Permutation<Trip> permutation = new Permutation<>(tripCombinationValidator, tripCombiner, tripWeightCalculator);
         
-        return combination.get(routes).size();
+        return permutation.get(routes).size();
     }
 
     private Set<Trip> extendMinimalRoutes(Set<Trip> minimalRoutes) {
