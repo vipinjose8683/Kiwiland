@@ -1,3 +1,4 @@
+@OnlyRun
 Feature: Trains In Kiwiland
   I have broken down the output so that i can work on them one at a time, starting with the most challenging.
   
@@ -8,8 +9,11 @@ Feature: Trains In Kiwiland
     When the program is executed
     Then the Output No 8 is "9"
 
-@OnlyRun
   Scenario: 9. The length of the shortest route (in terms of distance to travel) from B to B.
     When the program is executed
     Then the Output No 9 is "9"
+
+  Scenario: 10.The number of different routes from C to C with a distance of less than 30.  In the sample data, the trips are: CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC.
+    When the program is executed
+    Then the Output No 10 is "7"
 

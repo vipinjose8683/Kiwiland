@@ -1,5 +1,6 @@
 package kiwiland.trains;
 
+import kiwiland.trains.different.DifferentRoutesFinder;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.shortest.ShortestRouteFinder;
 
@@ -19,12 +20,15 @@ public class KiwilandTrainApp {
     private GraphCreator graphCreator = new GraphCreator();
     
     private ShortestRouteFinder spFinder = new ShortestRouteFinder();
+    
+    private DifferentRoutesFinder drFinder = new DifferentRoutesFinder();
 
     public String[] process(String inputString) {
         String[] result = new String[10];
         Graph graph = graphCreator.create(inputString);
         result[OUTPUT_8] = "" + spFinder.find(graph,"A","C");
         result[OUTPUT_9] = "" + spFinder.find(graph,"B","B");
+        result[OUTPUT_10] = "" + drFinder.find(graph,"C");
         // TODO Auto-generated method stub
         return result;
     }
