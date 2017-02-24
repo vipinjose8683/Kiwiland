@@ -23,11 +23,11 @@ import kiwiland.trains.weight.Measure;
  * Finds all different routes from the given source to destination
  *
  */
-public class CycleTripsFinder {
+public class CyclicTripsFinder {
 
     private Measure measure;
 
-    public CycleTripsFinder(Measure measure) {
+    public CyclicTripsFinder(Measure measure) {
         this.measure = measure;
     }
 

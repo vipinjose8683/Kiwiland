@@ -2,7 +2,7 @@ package kiwiland.trains;
 
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.shortest.ShortestRouteFinder;
-import kiwiland.trains.trips.CycleTripsFinder;
+import kiwiland.trains.trips.CyclicTripsFinder;
 import kiwiland.trains.trips.TripsFinder;
 import kiwiland.trains.weight.DistanceMeasure;
 import kiwiland.trains.weight.StopsMeasure;
@@ -24,9 +24,9 @@ public class KiwilandTrainApp {
 
     private ShortestRouteFinder spFinder = new ShortestRouteFinder();
 
-    private CycleTripsFinder tripsFinderByDistance = new CycleTripsFinder(new DistanceMeasure());
+    private CyclicTripsFinder tripsFinderByDistance = new CyclicTripsFinder(new DistanceMeasure());
 
-    private CycleTripsFinder tripsFinderByStops = new CycleTripsFinder(new StopsMeasure());
+    private CyclicTripsFinder tripsFinderByStops = new CyclicTripsFinder(new StopsMeasure());
 
     private TripsFinder tripsWithoutCycle = new TripsFinder();
 
