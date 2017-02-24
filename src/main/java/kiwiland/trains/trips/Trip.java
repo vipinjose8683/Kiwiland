@@ -1,4 +1,4 @@
-package kiwiland.trains.different;
+package kiwiland.trains.trips;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package kiwiland.trains.different;
+package kiwiland.trains.trips;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,11 +19,11 @@ import kiwiland.trains.weight.Measure;
  * Finds all different routes from the given source to destination
  *
  */
-public class TripsFinder {
+public class CycleTripsFinder {
 
     private Measure measure;
 
-    public TripsFinder(Measure measure) {
+    public CycleTripsFinder(Measure measure) {
         this.measure = measure;
     }
 

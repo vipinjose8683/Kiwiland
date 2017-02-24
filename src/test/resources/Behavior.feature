@@ -21,3 +21,7 @@ Feature: Trains In Kiwiland
     When the program is executed
     Then the Output No 6 is "2"
 
+  Scenario: 7. The number of trips starting at A and ending at C with exactly 4 stops.  In the sample data below, there are three such trips: A to C (via B,C,D); A to C (via D,C,D); and A to C (via D,E,B).
+    When the program is executed
+    Then the Output No 7 is "3"
+
