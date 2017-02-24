@@ -1,16 +1,16 @@
 package kiwiland.trains.domain;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Represents a node
  *
  */
-public class Node implements Comparable<Node> {
+public class Node {
     
     private String name;
-    private Map<Node, Integer> weightedEdges = new TreeMap<>();
+    private Map<Node, Integer> weightedEdges = new HashMap<>();
     
     public Node(String name) {
         super();
@@ -27,11 +27,6 @@ public class Node implements Comparable<Node> {
     
     public void addEdge(Node endTown, Integer distance) {
         weightedEdges.put(endTown, distance);
-    }
-
-    @Override
-    public int compareTo(Node o) {
-        return this.name.compareTo(o.name);
     }
 
     @Override

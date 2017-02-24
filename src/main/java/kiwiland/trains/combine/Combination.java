@@ -1,8 +1,9 @@
 package kiwiland.trains.combine;
 
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Finds out various combinations that fit the criteria for the given set of inputs.
@@ -39,14 +40,14 @@ public class Combination<T> {
     }
 
     public Set<String> get(Set<T> elements) {
-        Stack<T> combinedElements = new Stack<>();
+        Deque<T> combinedElements = new LinkedList<>();
         Set<String> allCombinations = new HashSet<>();
         Integer currentWeight = weightCalculator.initiate();
         allCombinations = getCombinations(elements, currentWeight, allCombinations, combinedElements);
         return allCombinations;
     }
 
-    private Set<String> getCombinations(Set<T> elements, Integer currentWeight, Set<String> allCombinations, Stack<T> combinedElements) {
+    private Set<String> getCombinations(Set<T> elements, Integer currentWeight, Set<String> allCombinations, Deque<T> combinedElements) {
         for(T element : elements) {
             combinedElements.push(element);
             Integer newWeight = weightCalculator.calculate(element, currentWeight);

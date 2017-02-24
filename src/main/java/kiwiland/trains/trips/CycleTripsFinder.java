@@ -4,11 +4,12 @@
 package kiwiland.trains.trips;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.Stack;
 
 import kiwiland.trains.combine.Combination;
 import kiwiland.trains.combine.Combiner;
@@ -33,7 +34,7 @@ public class CycleTripsFinder {
     public Integer find(Graph graph, String startTownS, Integer maxWeight) {
 
         Node startTown = graph.getTowns().get(startTownS);
-        Stack<Node> townStack = new Stack<>();
+        Deque<Node> townStack = new LinkedList<>();
         townStack.push(startTown);
         Integer currentDistance = 0;
         Set<Trip> routes = new HashSet<>();
@@ -59,7 +60,7 @@ public class CycleTripsFinder {
         return minimalRoutes;
     }
 
-    private Set<Trip> getMinimalRoutes(Node currentTown, Integer currentDistance, Node startTown, Stack<Node> townStack, Set<Trip> minimalRoutes, Integer maxWeight) {
+    private Set<Trip> getMinimalRoutes(Node currentTown, Integer currentDistance, Node startTown, Deque<Node> townStack, Set<Trip> minimalRoutes, Integer maxWeight) {
         Map<Node, Integer> edges = currentTown.getWieghtedEdges();
         for (Entry<Node, Integer> edgeEntry : edges.entrySet()) {
             Node nextTown = edgeEntry.getKey();
