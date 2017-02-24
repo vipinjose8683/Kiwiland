@@ -13,7 +13,7 @@ import java.util.Stack;
 import kiwiland.trains.domain.Edge;
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
-import kiwiland.trains.weight.Weightage;
+import kiwiland.trains.weight.Measure;
 
 /**
  * Finds all different routes from the given source to destination
@@ -21,10 +21,10 @@ import kiwiland.trains.weight.Weightage;
  */
 public class TripsFinder {
 
-    private Weightage weightage;
+    private Measure measure;
 
-    public TripsFinder(Weightage weightage) {
-        this.weightage = weightage;
+    public TripsFinder(Measure measure) {
+        this.measure = measure;
     }
 
     public Integer find(Graph graph, String startTownS, Integer maxWeight) {
@@ -85,7 +85,7 @@ public class TripsFinder {
         for (Entry<Edge, Node> edgeEntry : edges.entrySet()) {
             Node nextTown = edgeEntry.getValue();
             townStack.push(nextTown);
-            Integer newDistance = currentDistance + this.weightage.getWeight(edgeEntry);
+            Integer newDistance = currentDistance + this.measure.getWeight(edgeEntry);
             if (nextTown == startTown) {
                 minimalRoutes.add(new Trip(new ArrayList<>(townStack), newDistance));
             } else if (newDistance <= maxWeight) {

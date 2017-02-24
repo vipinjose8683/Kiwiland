@@ -12,7 +12,7 @@ import kiwiland.trains.domain.Node;
  * @author VXJ8774
  *
  */
-public interface Weightage {
+public interface Measure {
     
     Integer getWeight(Entry<Edge,Node> route);
 

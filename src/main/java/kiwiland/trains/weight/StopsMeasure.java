@@ -12,7 +12,7 @@ import kiwiland.trains.domain.Node;
  * Measures the weightage by the stop so it will always be 1
  *
  */
-public class StopWeightage implements Weightage {
+public class StopsMeasure implements Measure {
 
     /* (non-Javadoc)
      * @see kiwiland.trains.Weightage#getWeight(java.util.Map.Entry)
