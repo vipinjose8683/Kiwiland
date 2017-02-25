@@ -1,11 +1,9 @@
 package kiwiland.trains.shortest;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.PriorityQueue;
 
 import kiwiland.trains.domain.Graph;
 import kiwiland.trains.domain.Node;
@@ -22,16 +20,15 @@ public class ShortestRouteFinder {
          */
         Node startTown = graph.getTowns().get(startTownS);
         Node endTown = graph.getTowns().get(endTownS);
-        List<NodeDistance> unvisitedTowns = createUnvisitedTowns(graph, startTown);
+        PriorityQueue<NodeDistance> unvisitedTowns = createUnvisitedTowns(graph, startTown);
         Map<Node, NodeDistance> distance = createDistanceMap(unvisitedTowns, startTown);
         NodeDistance current = distance.get(startTown);
         Integer currentTownDistance = 0;
         while(!unvisitedTowns.isEmpty()) {
             Node town = current.getTown();
-            distance = getUpdatedDistance(town, distance, currentTownDistance);
+            distance = getUpdatedDistance(town, distance, currentTownDistance, unvisitedTowns);
             if (!unvisitedTowns.isEmpty()) {
-                Collections.sort(unvisitedTowns);
-                current = unvisitedTowns.remove(0);
+                current = unvisitedTowns.poll();
                 currentTownDistance = current.getDistance();
                 if (currentTownDistance == null) {
                     break;
@@ -41,7 +38,7 @@ public class ShortestRouteFinder {
         return distance.get(endTown).getDistance();
     }
 
-    private Map<Node, NodeDistance> getUpdatedDistance(Node current, Map<Node, NodeDistance> townDistances, Integer currentTownDistance) {
+    private Map<Node, NodeDistance> getUpdatedDistance(Node current, Map<Node, NodeDistance> townDistances, Integer currentTownDistance, PriorityQueue<NodeDistance> unvisitedTowns) {
         for (Entry<Node, Integer> edgeEntry : current.getWieghtedEdges().entrySet()) {
             Node endTown = edgeEntry.getKey();
             Integer distance = edgeEntry.getValue();
@@ -51,11 +48,14 @@ public class ShortestRouteFinder {
             if (currentEndTownDistance == null || newDistance < currentEndTownDistance) {
                 endTownDistance.setDistance(newDistance);
             }
+            if (unvisitedTowns.remove(endTownDistance)) {
+                unvisitedTowns.add(endTownDistance);
+            }
         }
         return townDistances;
     }
 
-    private Map<Node, NodeDistance> createDistanceMap(List<NodeDistance> unvisitedTowns, Node startTown) {
+    private Map<Node, NodeDistance> createDistanceMap(PriorityQueue<NodeDistance> unvisitedTowns, Node startTown) {
         Map<Node, NodeDistance> map = new HashMap<>();
         for (NodeDistance distance : unvisitedTowns) {
             map.put(distance.getTown(), distance);
@@ -64,8 +64,8 @@ public class ShortestRouteFinder {
         return map;
     }
     
-    private List<NodeDistance> createUnvisitedTowns(Graph graph, Node startTown) {
-        List<NodeDistance> list = new ArrayList<>();
+    private PriorityQueue<NodeDistance> createUnvisitedTowns(Graph graph, Node startTown) {
+        PriorityQueue<NodeDistance> list = new PriorityQueue<>();
         for (Entry<String,Node> townEntry : graph.getTowns().entrySet()) {
             Node town = townEntry.getValue();
             if (!startTown.equals(town)) {

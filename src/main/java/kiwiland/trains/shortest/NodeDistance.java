@@ -40,25 +40,28 @@ class NodeDistance implements Comparable<NodeDistance> {
     public boolean equals(Object obj) {
         boolean equals = false;
         if (obj instanceof NodeDistance) {
-            equals = this.compareTo((NodeDistance)obj) == 0;
+            NodeDistance other = (NodeDistance)obj;
+            equals = this.town.getName().equals(other.town.getName());
         }
         return equals;
     }
 
     @Override
     public int compareTo(NodeDistance o) {
-        int value;
-        if (this.distance == null) {
-            if (o.distance == null) {
-                value = -1;
+        int value = this.town.getName().compareTo(o.town.getName());
+        if (value != 0) {
+            if (this.distance == null) {
+                if (o.distance == null) {
+                    value = -1;
+                } else {
+                    value = 1;
+                }
             } else {
-                value = 1;
-            }
-        } else {
-            if (o.distance == null) {
-                value = -1;
-            } else {
-                value = this.distance.compareTo(o.distance);
+                if (o.distance == null) {
+                    value = -1;
+                } else {
+                    value = this.distance.compareTo(o.distance);
+                }
             }
         }
         return value;
